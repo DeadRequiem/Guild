@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WoS Guild Manager</title>
+    <style>
+        body {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+        }
+        td {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 8pt;
+            width: 150px; /* Set fixed width for each cell */
+        }
+        p {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Well of Souls Guilds</h2>
+    <hr>
+    <nav>
+        <ul>
+            <li><a href="{% url 'guild_list' %}">Guild Hall</a></li>
+            <li><a href="http://www.synthetic-reality.com/donate.htm">Donate</a></li>
+            <li><a href="http://www.synthetic-reality.com/wosHome.htm">WoS Home</a></li>
+            <li><a href="http://www.synthetic-reality.com/wosGuildInfo.htm">About Guilds</a></li>
+            <li><a href="https://deadrequiem.github.io/">World Info</a></li>
+            <!-- Add more navigation links here -->
+        </ul>
+    </nav>
+    <hr>
+    <b>ACTIVE GUILDS:</b>
+    <table cellspacing="0" cellpadding="4" width="100%" border="1">
+        <thead>
+            <tr bgcolor="#D5E6E1">
+                <td width="150px">Uniform</td> <!-- Set fixed width for each header cell -->
+                <td width="150px">Guild Name</td>
+                <td width="150px">Members</td>
+                <td width="150px">Guild Founder</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for guild in active_guilds %}
+            <tr>
+                <td>{{ guild.acronym }}</td>
+                <td><a href="{% url 'guild_page' guild.pk %}">{{ guild.name }}</a></td>
+                <td>{{ guild.total_members }}</td>
+                <td>{{ guild.founder }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <b>INACTIVE GUILDS:</b>
+    <table cellspacing="0" cellpadding="4" width="100%" border="1">
+        <thead>
+            <tr bgcolor="#D5E6E1">
+                <td width="150px">Uniform</td>
+                <td width="150px">Guild Name</td>
+                <td width="150px">Members</td>
+                <td width="150px">Guild Founder</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for guild in inactive_guilds %}
+            <tr>
+                <td>{{ guild.acronym }}</td>
+                <td><a href="{% url 'guild_page' guild.pk %}">{{ guild.name }}</a></td>
+                <td>{{ guild.total_members }}</td>
+                <td>{{ guild.founder }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+</body>
+</html>
